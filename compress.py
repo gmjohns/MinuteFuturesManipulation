@@ -3,11 +3,13 @@ import numpy as np
 import os
 
 
-def compress_data(data, ppd):
+def get_vpp(data):
     eod_v = data.groupby('date')['volume'].sum()
     avg = eod_v.mean()
-    vpp = avg/ppd
-    print(vpp)
+    return avg/ppd
+
+
+def make_seq(data, vpp):
     rv = 0
     i = 0
     new_ser = []
@@ -19,8 +21,10 @@ def compress_data(data, ppd):
         if i != data['volume'].size:
             new_ser.append(i)
         rv = rv-vpp
-    seq = pd.Series(new_ser)
+    return pd.Series(new_ser)
 
+
+def compress(data, seq):
     n = 0
     full = []
     print(seq)
@@ -32,14 +36,15 @@ def compress_data(data, ppd):
         full.append(point)
         '''print(point)'''
 
-    df = pd.DataFrame(full, columns=['date', 'time', 'vwa'])
-    '''print(df)'''
-    return df
+    return pd.DataFrame(full, columns=['date', 'time', 'vwa'])
 
-fname = ''
-ppd = 100
-raw = pd.read_csv(os.getcwd() + '\\minute_futures_data\\' + fname, sep=",", header=None)
+
+fname = 'test1'
+ppd = 2
+raw = pd.read_csv(os.getcwd() + '/minute_futures_data/' + fname + '.txt', sep=",", header=None)
 raw.columns = ['date', 'time', 'open', 'close', 'high', 'low', 'volume']
-cdf = compress_data(raw, ppd)
+vpp = get_vpp(raw)
+seq = make_seq(raw, vpp)
+cdf = compress(raw, seq)
 cdf.to_csv(fname + 'compressed.csv', sep=',', index=False)
 
