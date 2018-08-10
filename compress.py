@@ -38,14 +38,12 @@ def compress(data, seq):
     return pd.DataFrame(full, columns=['date', 'time', 'vwa'])
 
 
-fname = 'test1.csv'
-ppd = 2
-raw = pd.read_csv(os.getcwd() + '/minute_futures_data/' + fname, sep=",", header=None)
+fname = 'CL'
+ppd = 100
+raw = pd.read_csv(os.getcwd() + '/minute_futures_data/' + fname + '.txt', sep=",", header=None)
 raw.columns = ['date', 'time', 'open', 'close', 'high', 'low', 'volume']
 vpp = get_vpp(raw)
-print(vpp)
 seq = make_seq(raw, vpp)
-print(seq)
 cdf = compress(raw, seq)
 cdf.to_csv(fname + 'compressed.csv', sep=',', index=False)
 
