@@ -38,7 +38,7 @@ def compress(data, seq):
     return pd.DataFrame(full, columns=['date', 'time', 'vwa'])
 
 
-fname = 'CL'
+fname = 'BP'
 ppd = 100
 raw = pd.read_csv(os.getcwd() + '/minute_futures_data/' + fname + '.txt', sep=",", header=None)
 raw.columns = ['date', 'time', 'open', 'close', 'high', 'low', 'volume']

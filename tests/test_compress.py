@@ -16,7 +16,7 @@ class TestGetVpp(TestCase):
 
     def test_get_vpp(self):
         exp = 50.0
-        import compress
+        from src import compress
         assert compress.get_vpp(self.fixture) == exp, 'vpp calculation error'
 
 
@@ -24,7 +24,7 @@ class TestMakeSeq(TestCase):
     def setUp(self):
         test_file_name = 'test1.csv'
         try:
-            import compress
+            from src import compress
             test_data = pd.read_csv(os.getcwd() + '/minute_futures_data/' + test_file_name, sep=",", header=None)
             test_data.columns = ['date', 'time', 'open', 'close', 'high', 'low', 'volume']
             self.fixture = compress.make_seq(test_data, vpp=50.0)
@@ -48,7 +48,7 @@ class TestCompress(TestCase):
     def setUp(self):
         test_file_name = 'test1.csv'
         try:
-            import compress
+            from src import compress
             test_data = pd.read_csv(os.getcwd() + '/minute_futures_data/' + test_file_name, sep=",", header=None)
             test_data.columns = ['date', 'time', 'open', 'close', 'high', 'low', 'volume']
             self.fixture = compress.compress(test_data, seq=pd.DataFrame([[0, 10.0],
