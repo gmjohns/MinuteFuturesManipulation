@@ -1,5 +1,4 @@
-# FuturesWithFeatureTools
-
+# MinuteFuturesManipulation
 ## About 
 This is a repository for scripts dealing with manuipulating minute based futures data for various entities. These scripts are used in combination with a raw data set aquired from kibot.com. This data set is not freely distributed, however some sample data is provided for testing of certain scripts. In general, this repository is intended for personal use only. Therefore, generallity and ease of use is not a major concern of this repository.
 
